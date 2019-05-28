@@ -4,8 +4,10 @@ class Header extends Component{
   render(){
     return(
       <header>
-        <h1> Programming jokes <h1/>
-      <header/>
+        <h1> Programming jokes </h1>
+      </header>
     )
   }
 }
+
+export default Header;
