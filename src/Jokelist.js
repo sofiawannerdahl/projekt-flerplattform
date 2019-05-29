@@ -24,11 +24,11 @@ class Jokelist extends Component {
         const data = this.props.jokelist.joke;
         //localStorage.clear();
         localStorage.setItem("joke", data);
-    }
-/*
-    getJoke(){
-      var jokeData = localStorage.getItem("data");
-    }
+    };
 }
-*/
+
+//  getJoke(){
+//     var jokeData = localStorage.getItem("data");
+//    }}
+
 export default Jokelist;
