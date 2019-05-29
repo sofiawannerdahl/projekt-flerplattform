@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Joke from './Joke';
 
 class Jokelist extends Component {

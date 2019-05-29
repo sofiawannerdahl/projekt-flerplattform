@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './index.css';
 import Header from './Header';
 import Jokelist from './Jokelist';

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 export class Joke extends Component {
     
@@ -6,12 +7,25 @@ export class Joke extends Component {
         const jokes = this.props.joke;
         console.log(jokes); 
 
-        const jokeitem =  <p> {jokes} </p>;
+        //const jokeitem = <p>{jokes} </p>;
 
             return (
+                <Card>
+                    <Card.Header> FUN Joke. </Card.Header>
+                    <Card.Body>
+                        <Card.Title>(categori) joke</Card.Title>
+                        <Card.Text>
+                            {jokes}
+                        </Card.Text>
+                        <Button variant="primary">Get another joke!</Button>
+                     </Card.Body>
+                </Card>
+
+                /*
                 <div>
                     {jokeitem}
                 </div>
+                */
             )
     }
 }
