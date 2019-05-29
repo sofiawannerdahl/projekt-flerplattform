@@ -3,7 +3,6 @@ import './index.css';
 import Header from './Header';
 import Jokelist from './Jokelist';
 
-
 class App extends Component{
 
     constructor(props) {
