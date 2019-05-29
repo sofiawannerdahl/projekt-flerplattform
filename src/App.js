@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import Header from './Header';
-import Jokelist from './Factlist';
+import Jokelist from './Jokelist';
 
 
 class App extends Component{
@@ -9,9 +9,9 @@ class App extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            factlist: [],
+            jokelist: [],
         }
-        //console.log(this.state.factlist);
+        //console.log(this.state.jokelist);
     }
 
     componentDidMount() {
@@ -20,9 +20,9 @@ class App extends Component{
         .then(result => {
             return result.json()
         })
-        .then(factlist => {
+        .then(jokelist => {
             this.setState({
-                factlist: factlist,
+                jokelist: jokelist,
             })
         })
         .catch(error => {
@@ -32,13 +32,13 @@ class App extends Component{
 
 
     render(){
-        const facts = this.state.factlist;
+        const jokes = this.state.jokelist;
 
-        console.log(facts);
+        console.log(jokes);
         return (
             <div>
                 <Header/>
-                <Jokelist factlist={facts}/>
+                <Jokelist jokelist={jokes}/>
             </div>
         )
     }

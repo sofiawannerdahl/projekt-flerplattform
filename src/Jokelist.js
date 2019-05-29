@@ -4,24 +4,24 @@ import Joke from './Joke';
 class Jokelist extends Component {
     render() {
 
-        const factlist = this.props.factlist;
-        console.log(factlist)
+        const jokelist = this.props.jokelist;
+        console.log(jokelist)
 
-        if(factlist.type === "single"){
+        if(jokelist.type === "single"){
             this.setJoke();
-            return <Joke fact={factlist.joke} />
+            return <Joke joke={jokelist.joke} />
 
         }else {
 
-            const twoType = factlist.setup + " " + factlist.delivery
+            const twoType = jokelist.setup + " " + jokelist.delivery
             this.setJoke();
-            return <Joke fact={twoType} />
+            return <Joke joke={twoType} />
         }
 
     }
 
     setJoke(){
-        const data = this.props.factlist.joke; 
+        const data = this.props.jokelist.joke; 
         //localStorage.clear();
         localStorage.setItem("joke", data);
     }

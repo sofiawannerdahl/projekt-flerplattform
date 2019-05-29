@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 export class Joke extends Component {
     
     render() {
-        const facts = this.props.fact;
-        console.log(facts); 
+        const jokes = this.props.joke;
+        console.log(jokes); 
 
-        const factitem =  <p> {facts} </p>;
+        const jokeitem =  <p> {jokes} </p>;
 
             return (
                 <div>
-                    {factitem}
+                    {jokeitem}
                 </div>
             )
     }
