@@ -21,7 +21,6 @@ class Jokelist extends Component {
     }
 
     setJoke(){
-<<<<<<< HEAD
         const data = this.props.jokelist.joke;
         //localStorage.clear();
         localStorage.setItem("joke", data);
@@ -33,12 +32,3 @@ class Jokelist extends Component {
 }
 */
 export default Jokelist;
-=======
-        const data = this.props.jokelist.joke; 
-        //localStorage.clear();
-        localStorage.setItem("joke", data);
-    }
-}
-
-export default Jokelist;
->>>>>>> 5fa8b61b48292632869abdda3000d0d7df2ca16d
