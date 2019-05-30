@@ -25,19 +25,17 @@ class App extends Component{
     handleSubmit(event) {
      //alert(this.state.category);
      event.preventDefault();
-     console.log("hej");
      let category = this.state.category;
-     console.log("hejjjjj")
 
+     var url;
      if (category === "All"){
-       var url = 'https://sv443.net/jokeapi/category/Programming';
+       url = 'https://sv443.net/jokeapi/category/Programming';
      }else if (category === ""){
        alert('You need to choose a category!')
      }else{
-       var url = `https://sv443.net/jokeapi/category/Programming?blacklistFlags=${category}`;
+       url = `https://sv443.net/jokeapi/category/Programming?blacklistFlags=${category}`;
      }
 
-    console.log(url)
 
     fetch(url)
      .then(result => {
@@ -52,10 +50,7 @@ class App extends Component{
     }
     
     render(){
-        console.log("sttttttkk");
-
         const jokes = this.state.jokelist;
-        console.log(jokes)
         return (
             <div>
                 <Header/>

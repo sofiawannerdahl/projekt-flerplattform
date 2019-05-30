@@ -5,19 +5,21 @@ class Jokelist extends Component {
     render() {
 
         const jokelist = this.props.jokelist;
-        console.log(jokelist)
 
-        if(jokelist.type === "single"){
-            this.setJoke();
-            return <Joke joke={jokelist.joke} />
+        if(jokelist.length === 0){
+            return <Joke joke={"Make yourself ready for the funniest programming joke!"}/>
+        }else{
 
-        }else {
+            if(jokelist.type === "single"){
+                this.setJoke();
+                return <Joke joke={jokelist.joke} />
 
-            const twoType = jokelist.setup + " " + jokelist.delivery
-            this.setJoke();
-            return <Joke joke={twoType} />
+            }else {
+                const twoType = jokelist.setup + " " + jokelist.delivery
+                this.setJoke();
+                return <Joke joke={twoType} />
+            }
         }
-
     }
 
     setJoke(){
