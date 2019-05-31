@@ -11,19 +11,20 @@ class Jokelist extends Component {
         }else{
 
             if(jokelist.type === "single"){
-                this.setJoke();
+                const oneType = this.props.jokelist.joke;
+                this.setJoke(oneType);
                 return <Joke joke={jokelist.joke} />
 
             }else {
                 const twoType = jokelist.setup + " " + jokelist.delivery
-                this.setJoke();
+                this.setJoke(twoType);
                 return <Joke joke={twoType} />
             }
         }
     }
 
-    setJoke(){
-        const data = this.props.jokelist.joke;
+    setJoke(data){
+        //const data = this.props.jokelist.joke;
         //localStorage.clear();
         localStorage.setItem("joke", data);
     };
