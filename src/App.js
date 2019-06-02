@@ -17,16 +17,17 @@ class App extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    // tar emot från formuläret efter vald categori
     handleChange(event) {
       this.setState({category: event.target.value, jokelist: []});
     }
 
+    // tar emot från formuläret efter submit
     handleSubmit(event) {
      event.preventDefault();
      let category = this.state.category;
-     console.log(category)
 
+     // Kontrollerar vilken kategori användaren valt, och om hen valt en kategori alls
      var url;
      if (category === "All"){
        url = 'https://sv443.net/jokeapi/category/Programming';
@@ -36,7 +37,7 @@ class App extends Component{
        url = `https://sv443.net/jokeapi/category/Programming?blacklistFlags=${category}`;
      }
 
-
+    // Efter att url:en hämtats och kontrollerar om den hämtats korrekt 
     fetch(url)
      .then(result => {
        return result.json()
@@ -48,6 +49,8 @@ class App extends Component{
        console.log(error);
      });
     }
+    
+    // Dispositionen för componenterna på webbsidan
     render(){
       return (
         <div>
