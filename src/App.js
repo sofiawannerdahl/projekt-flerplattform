@@ -11,7 +11,6 @@ class App extends Component{
         this.state = {
             jokelist: [],
             category: '',
-            /*url: ''*/
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,7 +19,7 @@ class App extends Component{
 
 
     handleChange(event) {
-        this.setState({category: event.target.value});
+      this.setState({category: event.target.value, jokelist: []});
     }
 
     handleSubmit(event) {
@@ -49,17 +48,14 @@ class App extends Component{
        console.log(error);
      });
     }
-    
     render(){
-        const jokes = this.state.jokelist;
-        console.log(jokes)
-        return (
-            <div>
-                <Header/>
-                <F value={this.state.category}  onSubmitValue={this.handleSubmit} handleChange={this.handleChange}/>
-                <Jokelist jokelist={jokes}/>
-            </div>
-        )
+      return (
+        <div>
+          <Header/>
+          <F value={this.state.category}  onSubmitValue={this.handleSubmit} handleChange={this.handleChange}/>
+          <Jokelist jokelist={this.state.jokelist}/>
+        </div>
+      )
     }
 }
 

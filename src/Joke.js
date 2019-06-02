@@ -5,8 +5,6 @@ export class Joke extends Component {
     render() {
         const jokes = this.props.joke;
         const J = JSON.parse(localStorage.getItem("joke"));
-        console.log(J);
-        //const jokeitem = <p>{jokes} </p>;
 
         if(J.length === 0){
             return(
@@ -16,17 +14,17 @@ export class Joke extends Component {
                 </div>
             </div>
         )}else{
-            return(
-                <div id="joke-container">
-                    {J.map((text, i) => {
-                        return(
-                        <div key={i} id="joke">
-                            <p>{text.text}</p>
-                        </div>
-                        )
-                    })}
+          return(
+            <div id="joke-container">
+              {J.map((text, i) => {
+                return(
+                <div key={i} id="joke">
+                  <p>{text.text}</p>
                 </div>
-            )
+                )
+              })}
+            </div>
+          )
         }
     }
 }
