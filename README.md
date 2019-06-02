@@ -26,7 +26,6 @@ In the terminal, it should display: Compiled successfully! You can now view proj
 
 Open http://localhost:3000/ to view it in the browser.
 
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
