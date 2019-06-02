@@ -22,9 +22,9 @@ Get started:
 
 1. In the project directory, run npm start
 
-In the terminal, it should display: Compiled successfully! You can now view projekt-plattform in the browser. Local: http://localhost:3000/, On Your Network: http://192.168.8.104:3000/.
+In the terminal, it should display: Compiled successfully!
 
-Open http://localhost:3000/ to view it in the browser.
+Open http://localhost:3000/ to view "projekt-plattform" in the browser.
 
 ## Learn More
 
