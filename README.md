@@ -7,7 +7,7 @@ The application was built for a project as part of the course "Cross-platform Ap
 ## Requirements
 
 Node.js and
-Node package manager
+NodeJS package manager
 
 ## Installation
 If you don not already have Node.js downloaded and NPM installed, you need to do that first.
