@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import Header from './Header';
-import Jokelist from './Jokelist';
+import Header from './components/Header';
+import Jokelist from './components/Jokelist';
 import F from './components/Form'
 
 class App extends Component{
@@ -11,21 +11,21 @@ class App extends Component{
         this.state = {
             jokelist: [],
             category: '',
-            /*url: ''*/
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     handleChange(event) {
-        this.setState({category: event.target.value});
+      this.setState({category: event.target.value, jokelist: []});
     }
 
     handleSubmit(event) {
-     //alert(this.state.category);
      event.preventDefault();
      let category = this.state.category;
+     console.log(category)
 
      var url;
      if (category === "All"){
@@ -48,16 +48,14 @@ class App extends Component{
        console.log(error);
      });
     }
-    
     render(){
-        const jokes = this.state.jokelist;
-        return (
-            <div>
-                <Header/>
-                <F value={this.state.category}  onSubmitValue={this.handleSubmit} handleChange={this.handleChange}/>
-                <Jokelist jokelist={jokes}/>
-            </div>
-        )
+      return (
+        <div>
+          <Header/>
+          <F value={this.state.category}  onSubmitValue={this.handleSubmit} handleChange={this.handleChange}/>
+          <Jokelist jokelist={this.state.jokelist}/>
+        </div>
+      )
     }
 }
 
