@@ -6,7 +6,7 @@ The application was built for a project as part of the course "Cross-platform Ap
 
 ## Requirements
 
-Node.js
+Node.js and
 Node package manager
 
 ## Installation
