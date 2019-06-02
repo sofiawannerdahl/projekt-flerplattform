@@ -1,6 +1,6 @@
 ## FUN jokes
 
-FUN jokes is a web application built with react [Create React App](https://github.com/facebook/create-react-app) which fetch and display a random programming joke using JokeAPI (https://sv443.net/jokeapi). You can fetch four types of programming jokes - all (random type), not safe for work, political and religious.
+FUN jokes is a web application built with react [Create React App](https://github.com/facebook/create-react-app) which fetch and display a random programming joke using [JOKEAPI](https://sv443.net/jokeapi). You can fetch four types of programming jokes - all (random type), not safe for work, political and religious.
 
 The application was built for a project as part of the course "Cross-platform Applications with Web Technologies" at Malmö University.
 
