@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import Header from './Header';
-import Jokelist from './Jokelist';
+import Header from './components/Header';
+import Jokelist from './components/Jokelist';
 import F from './components/Form'
 
 class App extends Component{
