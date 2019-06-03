@@ -19,6 +19,7 @@ header{
   color: white;
 }
 
+
 form{
   padding: 2%;
 }
@@ -45,6 +46,14 @@ button:hover{
   background-color: white;
 }
 
+.removeBtn{
+  border: 2px solid #555555;
+  background-color: white;
+  color: #555555;
+  border-radius: 0%;
+  width: 10%;
+}
+
 #joke-container{
   font-style: italic;
   width: 60%;
@@ -62,7 +71,8 @@ button:hover{
 	background-color: white;
 	margin: 2%;
 	box-shadow: 0 0 5px #999;
-	font-size: 18px;
+  font-size: 18px;
+  text-align: center;
 }
 
 @media (max-width: 768px){
