@@ -12,11 +12,11 @@ class Jokelist extends Component {
       }else if(jokelist.type === "single"){
         const oneType = this.props.jokelist.joke;
         this.setJoke(jokelist, oneType);
-        return <Joke joke={jokelist.joke}/>
+        return <Joke joke={jokelist.joke} clearLocal={this.clearJokes} onRemoveThis={this.removeThis}/>
       }else {
         const twoType = jokelist.setup + " " + jokelist.delivery
         this.setJoke(jokelist, twoType);
-        return <Joke joke={twoType}/>
+        return <Joke joke={twoType} clearLocal={this.clearJokes} onRemoveThis={this.removeThis}/>
       }
     }
 
@@ -48,6 +48,20 @@ setJoke(jokelist, data){
 
   localStorage.setItem("joke", JSON.stringify(jokes));
   };
+
+  // remove all items in localStorage and reload the page
+  clearJokes(){
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  onRemoveThis(){
+    /* HUR får vi med så att text.id från Joke skickas med hit? så att den fattar vilken som ska tas bort?? 
+    likt onClick=remove(this) ?? */
+    //this.removeThis = this.removeThis.bind(this);
+    localStorage.removeItem('id');
+  }
+
 }
 
 export default Jokelist;

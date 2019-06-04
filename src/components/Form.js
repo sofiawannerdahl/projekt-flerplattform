@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class F extends Component{
 
+  // formuläret för att välja kategori och eventuella värdet tas om hand i App.js
   render(){
     return(
       <form onSubmit={this.props.onSubmitValue}>

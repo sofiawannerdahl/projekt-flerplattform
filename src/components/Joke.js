@@ -16,13 +16,15 @@ export class Joke extends Component {
         )}else{
           return(
             <div id="joke-container">
-              {J.map((text, i) => {
+              {J.map((text) => {
                 return(
-                <div key={i} id="joke">
-                  <p>{text.text}</p>
+                <div key={text.id} id="joke">
+                  <p>{text.text}</p> <button className="removeBtn" onClick={this.removeThis} >Remove this joke!</button>
                 </div>
                 )
               })}
+              <button className="removeBtn" onClick={this.props.clearLocal}>Clear all jokes!</button>
+
             </div>
           )
         }
