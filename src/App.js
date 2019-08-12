@@ -15,6 +15,7 @@ class App extends Component{
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     // tar emot från formuläret efter vald categori
@@ -49,6 +50,7 @@ class App extends Component{
        console.log(error);
      });
     }
+    
     
     // Dispositionen för componenterna på webbsidan
     render(){
