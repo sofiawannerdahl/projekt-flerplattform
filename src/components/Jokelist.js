@@ -6,7 +6,7 @@ class Jokelist extends Component {
   render() {
     const jokelist = this.props.jokelist;
     console.log(jokelist);
-    this.handleDelete = this.handleDelete.bind(this);
+    //this.handleDelete = this.handleDelete.bind(this);
 
     if(jokelist.length === 0){
         this.getJokes();
@@ -53,21 +53,34 @@ class Jokelist extends Component {
   // remove all items in localStorage and reload the page
   clearJokes(){
     localStorage.clear();
-    window.location.reload();
+    //window.location.reload();
   }
 
   handleDelete(event){
-    /* HUR får vi med så att text.id från Joke skickas med hit? så att den fattar vilken som ska tas bort?? 
-    likt onClick=remove(this) ?? */
-    
-    console.log(event.target.value);
-    var jokes = localStorage.getItem("joke");
 
+    var chosenJoke = event.target.value;  
+    console.log(chosenJoke); //ID:et på skämtet man har klickat på skrivs ut här
+
+    var jokes = JSON.parse(localStorage.getItem("joke"));
+    
+    //var newJokes = jokes.filter(joke => joke.id !== chosenJoke); VILL FÅ DEN HÄR ATT FUNGERA!
+
+    for (var i=0; i < jokes.length; i++){
+      var jokeID = jokes[i].id;
+      if (jokeID == chosenJoke){
+        jokes.splice(i, 1);
+      }
+    }
+    console.log(jokes); //Skriver ut en uppdaterad lista utan det borttagna skämtet
+    localStorage.setItem("joke", JSON.stringify(jokes));
+  
+    /*
     const deleteJoke = jokes.filter(function(joke) {
       return joke.id === event.target.value;
     });
-      
     localStorage.removeItem(deleteJoke);
+    */
+
   }
 
 
