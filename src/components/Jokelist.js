@@ -5,8 +5,6 @@ class Jokelist extends Component {
 
   render() {
     const jokelist = this.props.jokelist;
-    console.log(jokelist);
-    //this.handleDelete = this.handleDelete.bind(this);
 
     if(jokelist.length === 0){
         this.getJokes();
@@ -53,7 +51,6 @@ class Jokelist extends Component {
   // remove all items in localStorage and reload the page
   clearJokes(){
     localStorage.clear();
-    //window.location.reload();
   }
 
   handleDelete(event){
@@ -71,7 +68,6 @@ class Jokelist extends Component {
         jokes.splice(i, 1);
       }
     }
-    console.log(jokes); //Skriver ut en uppdaterad lista utan det borttagna skämtet
     localStorage.setItem("joke", JSON.stringify(jokes));
   
     /*
