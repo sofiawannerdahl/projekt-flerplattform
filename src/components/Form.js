@@ -5,7 +5,7 @@ class F extends Component{
   // formuläret för att välja kategori och eventuella värdet tas om hand i App.js
   render(){
     return(
-      <form onSubmit={this.props.onSubmitValue}>
+      <form onSubmit={this.props.handleSubmit}>
           <h3>Choose category of programming joke</h3>
             <select id="id-select" value={this.props.value} onChange={this.props.handleChange}>
               <option value="">Select category </option>
