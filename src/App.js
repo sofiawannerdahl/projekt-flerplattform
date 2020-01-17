@@ -11,6 +11,7 @@ class App extends Component{
         this.state = {
             jokelist: [],
             category: '',
+            joke: {}, //nuvarande skämt
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,15 +19,17 @@ class App extends Component{
 
     }
 
-    // tar emot från formuläret efter vald categori
+    // tar emot från formuläret efter vald kategori
     handleChange(event) {
-      this.setState({category: event.target.value, jokelist: []});
+      this.setState({category: event.target.value});
     }
 
     // tar emot från formuläret efter submit
     handleSubmit(event) {
      event.preventDefault();
      let category = this.state.category;
+     //console.log(category); STÄMMER
+
 
      // Kontrollerar vilken kategori användaren valt, och om hen valt en kategori alls
      var url;
@@ -42,14 +45,26 @@ class App extends Component{
     fetch(url)
      .then(result => {
        return result.json()
-     }).then(jokelist => {
+     }).then(data => {
        this.setState({
-        jokelist: jokelist,
+        joke: data,
       })
+      console.log(this.state.joke) //nuvarande skämt (som ska läggas til i jokelist)
      }).catch(error => {
        console.log(error);
      });
-    }
+     if (this.state.jokelist == null){
+      this.setState({
+        jokelist: this.state.joke,
+      })
+    }else{
+      const jokelist = [...this.state.jokelist, this.state.joke]
+      this.setState({
+        jokelist: jokelist,//this.state.jokelist.concat(this.state.joke),
+      })
+    console.log(this.state.jokelist);
+    } 
+   }
     
     
     // Dispositionen för componenterna på webbsidan
@@ -57,7 +72,7 @@ class App extends Component{
       return (
         <div>
           <Header/>
-          <F value={this.state.category}  onSubmitValue={this.handleSubmit} handleChange={this.handleChange}/>
+          <F value={this.state.category}  handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
           <Jokelist jokelist={this.state.jokelist}/>
         </div>
       )
