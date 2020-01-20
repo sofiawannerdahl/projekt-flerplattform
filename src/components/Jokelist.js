@@ -12,27 +12,31 @@ class Jokelist extends Component {
     console.log(jokelist);
     
     if (jokelist.length === 0){
+      console.log("jokelist är tom");
       this.getJokes();
       return <Joke joke={"Make yourself ready for the funniest programming joke!"}/>
 
+      // falerar i denna loop. jokelist är korrekt och innehåller inga dublikanter men i denna loop så loggas endast första
     } else {
-        for (var i=0; i < jokelist.length; i++){
-          console.log(jokelist[i]);
-            if(jokelist[i].type === "single"){
-              const oneType = jokelist[i].joke;
-              console.log(jokelist[i].joke)
-              this.setJoke(jokelist[i], oneType);
-              return <Joke joke={jokelist[i].joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
-            
-            }else {
-              const twoType = jokelist[i].setup + " " + jokelist[i].delivery
-              console.log(jokelist[i].setup + " " + jokelist[i].delivery);
-              this.setJoke(jokelist[i], twoType);
-              return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
-            }
-          }
+    console.log("jokelist är INTE tom")
+
+      const joke = (jokelist.slice(-1)[0]);
+      console.log(joke); 
+      
+      if(joke.type === "single"){
+        const oneType = joke.joke;
+        console.log(joke.id + oneType);
+        this.setJoke(joke.id, oneType);
+        return <Joke joke={joke.joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+      
+      } else {
+          const twoType = joke.setup + " " + joke.delivery
+          console.log(joke.id + twoType);
+          this.setJoke(joke.id, twoType);
+          return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
         }
-      }
+      };
+    }
 
 
   getJokes() {
@@ -56,8 +60,10 @@ class Jokelist extends Component {
     const jokes = this.getJokes();
     console.log(jokes);
     
+    // lägg in filter så att inte två stycken skämt med samma id kan läggas till 
+
     jokes.push({
-        id: joke.id,
+        id: joke,
         text: data
     })
 
