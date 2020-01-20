@@ -28,8 +28,6 @@ class App extends Component{
     handleSubmit(event) {
      event.preventDefault();
      let category = this.state.category;
-     //console.log(category); STÄMMER
-
 
      // Kontrollerar vilken kategori användaren valt, och om hen valt en kategori alls
      var url;
@@ -46,25 +44,36 @@ class App extends Component{
      .then(result => {
        return result.json()
      }).then(data => {
-       this.setState({
-        joke: data,
+
+       // tar svaret från API:et, slår ihop det med det som finns i this.state.jokelist 
+       // sätter sen jokelist till state  
+      this.response = data;
+      const removeDublicate = [...this.state.jokelist, this.response];
+      const jokelist = [...new Set(removeDublicate)];
+
+      this.setState({
+        jokelist: jokelist,
       })
-      console.log(this.state.joke) //nuvarande skämt (som ska läggas til i jokelist)
-     }).catch(error => {
+      }).catch(error => {
        console.log(error);
      });
+
+     /*
+     //eftersom en extra trigger görs och första objektet då blir null behöver första skämtet läggas i joke för att sen läggas in i jokelist
      if (this.state.jokelist == null){
       this.setState({
         jokelist: this.state.joke,
       })
+      console.log(this.state.jokelist)
     }else{
       const jokelist = [...this.state.jokelist, this.state.joke]
       this.setState({
         jokelist: jokelist,//this.state.jokelist.concat(this.state.joke),
       })
     console.log(this.state.jokelist);
-    } 
+    } */
    }
+   
     
     
     // Dispositionen för componenterna på webbsidan

@@ -4,30 +4,37 @@ import Joke from './Joke';
 class Jokelist extends Component {
 
   render() {
+    // const dublicateJokelist = this.props.jokelist;
+    // const removeDublicate = new Set(dublicateJokelist);
+    // const jokelist = [...removeDublicate];
+   
     const jokelist = this.props.jokelist;
     console.log(jokelist);
-
-    if(jokelist.length === 0){
+    
+    if (jokelist.length === 0){
       this.getJokes();
       return <Joke joke={"Make yourself ready for the funniest programming joke!"}/>
-    }
 
-    for (var i=0; i < jokelist.length; i++){
-      console.log(jokelist[i])
-
-    
-      if(jokelist[i].type === "single"){
-        const oneType = jokelist[i].joke;
-        console.log("hej")
-        this.setJoke(jokelist[i], oneType);
-        return <Joke joke={jokelist[i].joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
-      }else {
-        const twoType = jokelist[i].setup + " " + jokelist[i].delivery
-        this.setJoke(jokelist[i], twoType);
-        return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+    } else {
+        for (var i=0; i < jokelist.length; i++){
+          console.log(jokelist[i]);
+            if(jokelist[i].type === "single"){
+              const oneType = jokelist[i].joke;
+              console.log(jokelist[i].joke)
+              this.setJoke(jokelist[i], oneType);
+              return <Joke joke={jokelist[i].joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+            
+            }else {
+              const twoType = jokelist[i].setup + " " + jokelist[i].delivery
+              console.log(jokelist[i].setup + " " + jokelist[i].delivery);
+              this.setJoke(jokelist[i], twoType);
+              return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+            }
+          }
+        }
       }
-    }
-  }
+
+
   getJokes() {
     // Hämtar alla skämt från localStorage
     var jokes = localStorage.getItem("joke");
@@ -47,7 +54,8 @@ class Jokelist extends Component {
 
   setJoke(joke, data){
     const jokes = this.getJokes();
-
+    console.log(jokes);
+    
     jokes.push({
         id: joke.id,
         text: data
@@ -73,7 +81,7 @@ class Jokelist extends Component {
 
     for (var i=0; i < jokes.length; i++){
       var jokeID = jokes[i].id;
-      if (jokeID == chosenJoke){
+      if (jokeID === chosenJoke){
         jokes.splice(i, 1);
       }
     }
