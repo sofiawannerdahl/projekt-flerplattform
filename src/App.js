@@ -16,7 +16,6 @@ class App extends Component{
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     // tar emot från formuläret efter vald kategori
@@ -45,8 +44,8 @@ class App extends Component{
        return result.json()
      }).then(data => {
 
-       // tar svaret från API:et, slår ihop det med det som finns i this.state.jokelist 
-       // sätter sen jokelist till state  
+      // tar svaret från API:et, slår ihop det med det som finns i this.state.jokelist 
+      // sätter sen jokelist till state  
       this.response = data;
       const removeDublicate = [...this.state.jokelist, this.response];
       const jokelist = [...new Set(removeDublicate)];
@@ -58,25 +57,11 @@ class App extends Component{
        console.log(error);
      });
 
-     /*
-     //eftersom en extra trigger görs och första objektet då blir null behöver första skämtet läggas i joke för att sen läggas in i jokelist
-     if (this.state.jokelist == null){
-      this.setState({
-        jokelist: this.state.joke,
-      })
-      console.log(this.state.jokelist)
-    }else{
-      const jokelist = [...this.state.jokelist, this.state.joke]
-      this.setState({
-        jokelist: jokelist,//this.state.jokelist.concat(this.state.joke),
-      })
-    console.log(this.state.jokelist);
-    } */
    }
    
     
     
-    // Dispositionen för componenterna på webbsidan
+    // Dispositionen för komponenterna på webbsidan
     render(){
       return (
         <div>

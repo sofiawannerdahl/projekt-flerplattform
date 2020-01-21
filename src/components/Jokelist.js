@@ -3,26 +3,18 @@ import Joke from './Joke';
 
 class Jokelist extends Component {
 
-  render() {
-    // const dublicateJokelist = this.props.jokelist;
-    // const removeDublicate = new Set(dublicateJokelist);
-    // const jokelist = [...removeDublicate];
-   
+  render() { 
     const jokelist = this.props.jokelist;
-    console.log(jokelist);
     
+    // om jokelist är tom, kolla localStorge och skriv ut stängen nedan
     if (jokelist.length === 0){
-      console.log("jokelist är tom");
       this.getJokes();
       return <Joke joke={"Make yourself ready for the funniest programming joke!"}/>
 
-      // falerar i denna loop. jokelist är korrekt och innehåller inga dublikanter men i denna loop så loggas endast första
     } else {
-    console.log("jokelist är INTE tom")
-
+      // ta sista skämtet i listan - det sist tillagda
       const joke = (jokelist.slice(-1)[0]);
-      console.log(joke); 
-      
+
       if(joke.type === "single"){
         const oneType = joke.joke;
         console.log(joke.id + oneType);
@@ -57,32 +49,59 @@ class Jokelist extends Component {
 
 
   setJoke(joke, data){
+    //hämta det som finns i localStorage
     const jokes = this.getJokes();
-    console.log(jokes);
     
-    // lägg in filter så att inte två stycken skämt med samma id kan läggas till 
+    const findId = (element) => element.id === joke;
+    const found = jokes.some(findId);
 
-    jokes.push({
+    // första gången ett skämt läggs till
+    if (jokes === null){ 
+      jokes.push({
         id: joke,
         text: data
-    })
+      })
+      localStorage.setItem("joke", JSON.stringify(jokes));
 
-    localStorage.setItem("joke", JSON.stringify(jokes));
-    };
+    // om skämtet inte finns i localStorage redan, lägg till det - för att motverka dubliketter
+    }else if (found === false){
+      jokes.push({
+        id: joke,
+        text: data
+      })
+      localStorage.setItem("joke", JSON.stringify(jokes));
+    }else{
+        console.log("Skämtet fanns redan i localStorage")
+    } 
+  }; 
 
-  // remove all items in localStorage and reload the page
+
+  // tar bort allt som finns i loclStorage och laddar om sidan för att tömma den
   clearJokes(){
     localStorage.clear();
     window.location.reload();
   }
 
+
   handleDelete(event){
+    let chosenJoke = event.target.value;  
+    console.log(chosenJoke); //ID:et på skämtet man har klickat på 
 
-    var chosenJoke = event.target.value;  
-    console.log(chosenJoke); //ID:et på skämtet man har klickat på skrivs ut här
+    let jokes = JSON.parse(localStorage.getItem("joke"));
+    const newJokes = jokes.splice(jokes.findIndex(e => e.id === chosenJoke),1);
+    console.log(newJokes);
 
-    var jokes = JSON.parse(localStorage.getItem("joke"));
-    
+    localStorage.setItem("joke", JSON.stringify(newJokes));
+
+    /*
+    // vill hita vilken plats skämtet har i listan på localStorage och ta bort det - FUNKAR EJ (än)
+    const findId = (element) => element.id === chosenJoke;
+    const found = jokes.findIndex(findId); //vilken plats i listan som skämtet har i localStorage
+    console.log(found);
+    localStorage.removeItem(jokes[found]); //ska tydligen kunna tas bort såhär
+  */
+
+    /*
     //var newJokes = jokes.filter(joke => joke.id !== chosenJoke); VILL FÅ DEN HÄR ATT FUNGERA!
 
     for (var i=0; i < jokes.length; i++){
@@ -92,12 +111,6 @@ class Jokelist extends Component {
       }
     }
     localStorage.setItem("joke", JSON.stringify(jokes));
-  
-    /*
-    const deleteJoke = jokes.filter(function(joke) {
-      return joke.id === event.target.value;
-    });
-    localStorage.removeItem(deleteJoke);
     */
 
   }
