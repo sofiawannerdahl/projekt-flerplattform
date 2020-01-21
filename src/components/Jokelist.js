@@ -17,13 +17,11 @@ class Jokelist extends Component {
 
       if(joke.type === "single"){
         const oneType = joke.joke;
-        console.log(joke.id + oneType);
         this.setJoke(joke.id, oneType);
         return <Joke joke={joke.joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
       
       } else {
           const twoType = joke.setup + " " + joke.delivery
-          console.log(joke.id + twoType);
           this.setJoke(joke.id, twoType);
           return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
         }
