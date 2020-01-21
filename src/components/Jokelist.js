@@ -16,15 +16,13 @@ class Jokelist extends Component {
       const joke = (jokelist.slice(-1)[0]);
 
       if(joke.type === "single"){
-        const oneType = joke.joke;
-        this.setJoke(joke.id, oneType);
-        return <Joke joke={joke.joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
-      
-      } else {
-          const twoType = joke.setup + " " + joke.delivery
-          this.setJoke(joke.id, twoType);
-          return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+        var jokeText = joke.joke;
+      }else{
+        var jokeText = joke.setup + " " + joke.delivery
         }
+
+      this.setJoke(joke.id, jokeText);
+      return <Joke joke={jokeText} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
       };
     }
 
@@ -86,33 +84,16 @@ class Jokelist extends Component {
     console.log(chosenJoke); //ID:et på skämtet man har klickat på 
 
     let jokes = JSON.parse(localStorage.getItem("joke"));
-    const newJokes = jokes.splice(jokes.findIndex(e => e.id === chosenJoke),1);
+
+    // tar bort alla UTOM det valda skämtet? Vad är fel??
+    var newJokes = jokes.filter(function(joke){
+      return chosenJoke.indexOf(joke.id) > -1;
+    });
+
     console.log(newJokes);
 
     localStorage.setItem("joke", JSON.stringify(newJokes));
-
-    /*
-    // vill hita vilken plats skämtet har i listan på localStorage och ta bort det - FUNKAR EJ (än)
-    const findId = (element) => element.id === chosenJoke;
-    const found = jokes.findIndex(findId); //vilken plats i listan som skämtet har i localStorage
-    console.log(found);
-    localStorage.removeItem(jokes[found]); //ska tydligen kunna tas bort såhär
-  */
-
-    /*
-    //var newJokes = jokes.filter(joke => joke.id !== chosenJoke); VILL FÅ DEN HÄR ATT FUNGERA!
-
-    for (var i=0; i < jokes.length; i++){
-      var jokeID = jokes[i].id;
-      if (jokeID === chosenJoke){
-        jokes.splice(i, 1);
-      }
-    }
-    localStorage.setItem("joke", JSON.stringify(jokes));
-    */
-
   }
-
 
 }
 
