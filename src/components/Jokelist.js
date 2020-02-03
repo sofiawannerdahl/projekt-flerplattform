@@ -19,7 +19,7 @@ class Jokelist extends Component {
         var jokeText = joke.joke;
       }else{
         var jokeText = joke.setup + " " + joke.delivery
-        }
+      }
 
       this.setJoke(joke.id, jokeText);
       return <Joke joke={jokeText} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
@@ -72,27 +72,37 @@ class Jokelist extends Component {
   }; 
 
 
-  // tar bort allt som finns i loclStorage och laddar om sidan för att tömma den
+  // tar bort allt som finns i localStorage och laddar om sidan för att tömma den
   clearJokes(){
     localStorage.clear();
     window.location.reload();
   }
 
-
+  // tar bort det skämt som du tryckt på, genom knappen "remove this joke"
   handleDelete(event){
-    let chosenJoke = event.target.value;  
-    console.log(chosenJoke); //ID:et på skämtet man har klickat på 
+    let chosenJoke = event.target.value;  // id:t på skämtet en klickat på
+    console.log("Remove: " , chosenJoke)
 
-    let jokes = JSON.parse(localStorage.getItem("joke"));
+    // hämta alla skämt från localStorage
+    let jokes = JSON.parse(localStorage.getItem("joke")); 
 
-    // tar bort alla UTOM det valda skämtet? Vad är fel??
-    var newJokes = jokes.filter(function(joke){
-      return chosenJoke.indexOf(joke.id) > -1;
+    // en tom lista som ska fyllas med det skämt som inte är borttagna
+    const newList = []; 
+
+    // loopar igenom localStorage och kollar om något id matchar id:t på det skämt en vill ta bort
+    // lägger sen till id:t i listan newList ifall dem inte matchar
+    jokes.forEach(function (joke) {
+      if(joke.id.toString() !== chosenJoke){
+        newList.push(joke);
+      }
     });
 
-    console.log(newJokes);
+    // lägger till skämten som inte tagits bort till localStorage
+    localStorage.setItem("joke", JSON.stringify(newList));
 
-    localStorage.setItem("joke", JSON.stringify(newJokes));
+    window.location.reload();
+
+    //this.props.jokelist = newList;
   }
 
 }
