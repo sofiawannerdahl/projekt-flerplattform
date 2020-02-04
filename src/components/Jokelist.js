@@ -66,9 +66,7 @@ class Jokelist extends Component {
         text: data
       })
       localStorage.setItem("joke", JSON.stringify(jokes));
-    }else{
-        console.log("Skämtet fanns redan i localStorage")
-    } 
+    }
   }; 
 
 
@@ -81,7 +79,6 @@ class Jokelist extends Component {
   // tar bort det skämt som du tryckt på, genom knappen "remove this joke"
   handleDelete(event){
     let chosenJoke = event.target.value;  // id:t på skämtet en klickat på
-    console.log("Remove: " , chosenJoke)
 
     // hämta alla skämt från localStorage
     let jokes = JSON.parse(localStorage.getItem("joke")); 
@@ -100,11 +97,9 @@ class Jokelist extends Component {
     // lägger till skämten som inte tagits bort till localStorage
     localStorage.setItem("joke", JSON.stringify(newList));
 
+    // laddar om sidan 
     window.location.reload();
-
-    //this.props.jokelist = newList;
   }
-
 }
 
 export default Jokelist;
