@@ -76,6 +76,7 @@ class Jokelist extends Component {
     window.location.reload();
   }
 
+  
   // tar bort det skämt som du tryckt på, genom knappen "remove this joke"
   handleDelete(event){
     let chosenJoke = event.target.value;  // id:t på skämtet en klickat på
