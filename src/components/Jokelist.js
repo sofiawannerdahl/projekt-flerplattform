@@ -3,31 +3,30 @@ import Joke from './Joke';
 
 class Jokelist extends Component {
 
-  render() {
+  render() { 
     const jokelist = this.props.jokelist;
-    console.log(jokelist);
-
-    if(jokelist.length === 0){
+    
+    // om jokelist är tom, kolla localStorge och skriv ut stängen nedan
+    if (jokelist.length === 0){
       this.getJokes();
       return <Joke joke={"Make yourself ready for the funniest programming joke!"}/>
-    }
 
-    for (var i=0; i < jokelist.length; i++){
-      console.log(jokelist[i])
+    } else {
+      // ta sista skämtet i listan - det sist tillagda
+      const joke = (jokelist.slice(-1)[0]);
 
-    
-      if(jokelist[i].type === "single"){
-        const oneType = jokelist[i].joke;
-        console.log("hej")
-        this.setJoke(jokelist[i], oneType);
-        return <Joke joke={jokelist[i].joke} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
-      }else {
-        const twoType = jokelist[i].setup + " " + jokelist[i].delivery
-        this.setJoke(jokelist[i], twoType);
-        return <Joke joke={twoType} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+      if(joke.type === "single"){
+        var jokeText = joke.joke;
+      }else{
+        var jokeText = joke.setup + " " + joke.delivery
       }
+
+      this.setJoke(joke.id, jokeText);
+      return <Joke joke={jokeText} clearLocal={this.clearJokes} value = {this.value} removeJoke={this.handleDelete}/>
+      };
     }
-  }
+
+
   getJokes() {
     // Hämtar alla skämt från localStorage
     var jokes = localStorage.getItem("joke");
@@ -46,49 +45,62 @@ class Jokelist extends Component {
 
 
   setJoke(joke, data){
+    //hämta det som finns i localStorage
     const jokes = this.getJokes();
+    
+    const findId = (element) => element.id === joke;
+    const found = jokes.some(findId);
 
-    jokes.push({
-        id: joke.id,
+    // första gången ett skämt läggs till
+    if (jokes === null){ 
+      jokes.push({
+        id: joke,
         text: data
-    })
+      })
+      localStorage.setItem("joke", JSON.stringify(jokes));
 
-    localStorage.setItem("joke", JSON.stringify(jokes));
-    };
+    // om skämtet inte finns i localStorage redan, lägg till det - för att motverka dubliketter
+    }else if (found === false){
+      jokes.push({
+        id: joke,
+        text: data
+      })
+      localStorage.setItem("joke", JSON.stringify(jokes));
+    }
+  }; 
 
-  // remove all items in localStorage and reload the page
+
+  // tar bort allt som finns i localStorage och laddar om sidan för att tömma den
   clearJokes(){
     localStorage.clear();
     window.location.reload();
   }
 
-  handleDelete(event){
-
-    var chosenJoke = event.target.value;  
-    console.log(chosenJoke); //ID:et på skämtet man har klickat på skrivs ut här
-
-    var jokes = JSON.parse(localStorage.getItem("joke"));
-    
-    //var newJokes = jokes.filter(joke => joke.id !== chosenJoke); VILL FÅ DEN HÄR ATT FUNGERA!
-
-    for (var i=0; i < jokes.length; i++){
-      var jokeID = jokes[i].id;
-      if (jokeID == chosenJoke){
-        jokes.splice(i, 1);
-      }
-    }
-    localStorage.setItem("joke", JSON.stringify(jokes));
   
-    /*
-    const deleteJoke = jokes.filter(function(joke) {
-      return joke.id === event.target.value;
+  // tar bort det skämt som du tryckt på, genom knappen "remove this joke"
+  handleDelete(event){
+    let chosenJoke = event.target.value;  // id:t på skämtet en klickat på
+
+    // hämta alla skämt från localStorage
+    let jokes = JSON.parse(localStorage.getItem("joke")); 
+
+    // en tom lista som ska fyllas med det skämt som inte är borttagna
+    const newList = []; 
+
+    // loopar igenom localStorage och kollar om något id matchar id:t på det skämt en vill ta bort
+    // lägger sen till id:t i listan newList ifall dem inte matchar
+    jokes.forEach(function (joke) {
+      if(joke.id.toString() !== chosenJoke){
+        newList.push(joke);
+      }
     });
-    localStorage.removeItem(deleteJoke);
-    */
 
+    // lägger till skämten som inte tagits bort till localStorage
+    localStorage.setItem("joke", JSON.stringify(newList));
+
+    // laddar om sidan 
+    window.location.reload();
   }
-
-
 }
 
 export default Jokelist;

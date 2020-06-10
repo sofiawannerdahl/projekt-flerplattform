@@ -5,16 +5,17 @@ export class Joke extends Component {
   render() {
     const jokes = this.props.joke;
     const J = JSON.parse(localStorage.getItem("joke"));
-    //console.log(J);
 
     if(J.length === 0){
       return(
-      <div id="joke-container">
-          <div id="joke">
-              <p>{jokes}</p>
-          </div>
-      </div>
-    )}else{
+        <div id="joke-container">
+            <div id="joke">
+                <p>{jokes}</p>
+            </div>
+        </div>
+      )
+    }else{
+      
       return(
         <div id="joke-container" /*value={this.props.value} onClick={this.props.removeJoke(this.value)}*/>
           {J.map((text) => {
